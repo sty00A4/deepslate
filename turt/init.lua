@@ -2,6 +2,7 @@ local turt = {
     meta = {}
 }
 
+--- TRANSFORM ---
 turt.meta.Position = {
     __name = "position",
     ---@param self Position
@@ -202,6 +203,7 @@ turt.Transform = {
     end
 }
 
+--- TURTLE ---
 turt.meta.Turtle = {
     __name = "turtle"
 }
