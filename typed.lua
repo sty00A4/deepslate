@@ -19,7 +19,8 @@ typed.Type = {
                 ---@return boolean
                 __eq = function(self, other)
                     if type(other) == "string" then other = typed.Type.from(other) end
-                    if type(other) ~= "type.type" then error("bad argument #1 (expected type.type, got "..type(other)..")", 2) end
+                    if type(other) ~= "type.type" then error("bad argument #2 (expected type.type, got "..type(other)..")", 2) end
+                    if type(self) ~= "type.type" then error("bad argument #1 (expected type.type, got "..type(self)..")", 2) end
                     if #other.path > #self.path then return false end
                     for i = 1, #other.path do
                         if self.path[i] ~= other.path[i] then
@@ -82,9 +83,10 @@ typed.Union = {
             ---@class type.union
             {
                 types = types,
+                ---@param self type.union
                 contains = function(self, v)
                     for _, typ in pairs(self.types) do
-                        if typ == v then
+                        if getmetatable(typ).__eq(typ, v) then
                             return true
                         end
                     end
