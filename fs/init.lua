@@ -106,7 +106,7 @@ fs.meta.File = {
     __newindex = function(t, k, v) error("file is immutable", 2) end
 }
 fs.File = {
-    ---@param path Path|string
+    ---@param path path|string
     ---@param fmode fileMode
     ---@return file|nil
     open = function(path, fmode)

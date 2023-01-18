@@ -194,7 +194,7 @@ turt.Transform = {
         assertType(3, z, "number")
         local pos = turt.Position.new(x, y, z)
         assertType(4, dir, "string") assertValue(4, dir, "north", "south", "west", "east")
-        dir = turt.Direction.new(dir)
+        local dir = turt.Direction.new(dir)
         return turt.Transform.new(pos, dir)
     end,
     ---@return transform
