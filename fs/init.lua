@@ -1,4 +1,4 @@
-local typed = require "deep.typed"
+local typed = require "deepslate.typed"
 local fs = { meta = {} }
 
 --- PATH ---
@@ -21,77 +21,70 @@ fs.Path = {
         assertType(1, path, "string")
         return setmetatable(
             ---@class path
-            { path = path },
+            { path = path, eq = fs.meta.Path },
             fs.meta.Path
         )
     end
 }
 
 --- FILE MODE ---
+fs.meta.FileMode = {
+    __eq = function (self, other)
+        return typed.Type.from(self) == typed.Type.from(other)
+    end
+}
 fs.FileMode = setmetatable({
     write = setmetatable(
         ---@class fileMode
-        { string = "w" },
+        { string = "w", eq = fs.meta.FileMode.__eq },
         {
             __name = "fileMode.write",
-            __eq = function (self, other)
-                return typed.Type.from(self) == typed.Type.from(other)
-            end,
+            __eq = fs.meta.FileMode.__eq,
             __tostring = function() return "write" end
         }
     ),
     read = setmetatable(
         ---@class fileMode
-        { string = "r" },
+        { string = "r", eq = fs.meta.FileMode.__eq },
         {
             __name = "fileMode.read",
-            __eq = function (self, other)
-                return typed.Type.from(self) == typed.Type.from(other)
-            end,
+            __eq = fs.meta.FileMode.__eq,
             __tostring = function() return "read" end
         }
     ),
     append = setmetatable(
         ---@class fileMode
-        { string = "a" },
+        { string = "a", eq = fs.meta.FileMode.__eq },
         {
             __name = "fileMode.append",
-            __eq = function (self, other)
-                return typed.Type.from(self) == typed.Type.from(other)
-            end,
+            __eq = fs.meta.FileMode.__eq,
             __tostring = function() return "append" end
         }
     ),
     writeByte = setmetatable(
         ---@class fileMode
-        { string = "wb" },
+        { string = "wb", eq = fs.meta.FileMode.__eq },
         {
             __name = "fileMode.write",
-            __eq = function (self, other)
-                return typed.Type.from(self) == typed.Type.from(other)
-            end,
+            __eq = fs.meta.FileMode.__eq,
             __tostring = function() return "writeByte" end
         }
     ),
     readByte = setmetatable(
         ---@class fileMode
-        { string = "rb" },
+        { string = "rb", eq = fs.meta.FileMode.__eq },
         {
             __name = "fileMode.read",
-            __eq = function (self, other)
-                return typed.Type.from(self) == typed.Type.from(other)
-            end,
+            __eq = fs.meta.FileMode.__eq,
             __tostring = function() return "readByte" end
         }
     ),
     appendByte = setmetatable(
         ---@class fileMode
-        { string = "ab" },
+        { string = "ab", eq = fs.meta.FileMode.__eq },
         {
             __name = "fileMode.append",
-            __eq = function (self, other)
-                return typed.Type.from(self) == typed.Type.from(other)
-            end,
+            __eq = fs.meta.FileMode.__eq,
             __tostring = function() return "appendByte" end
         }
     ),

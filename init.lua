@@ -1,7 +1,8 @@
-require "deep.global"
-local deep = {}
-deep.typed = require "deep.typed"
-deep.fs = require "deep.fs"
-deep.turt = require "deep.turt"
+require "deepslate.global"
+local deepslate = {}
+deepslate.typed = require "deepslate.typed"
+deepslate.fs = require "deepslate.fs"
+deepslate.turt = require "deepslate.turt"
+deepslate.event = require "deepslate.event"
 
-return deep
+return deepslate
