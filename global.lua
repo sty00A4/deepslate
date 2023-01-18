@@ -58,3 +58,32 @@ table.contains = function(t, v)
     end
     return false
 end
+---copies the given table
+---@param t table
+---@return table
+table.copy = function(t)
+    if rawtype(t) == "table" then
+        local newT = {}
+        for k, v in pairs(t) do
+            if rawtype(v) == "table" then
+                newT[k] = table.copy(v)
+            else
+                newT[k] = v
+            end
+        end
+        local meta = getmetatable(t)
+        if meta then
+            local newMeta = {}
+            for k, v in pairs(meta) do
+                if rawtype(v) == "table" then
+                    newMeta[k] = table.copy(v)
+                else
+                    newMeta[k] = v
+                end
+            end
+            return setmetatable(newT, newMeta)
+        end
+        return newT
+    end
+    error("bad argument #1 (expected table, got "..rawtype(t)..")", 2)
+end
